@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class Npc_dialogue : MonoBehaviour
 {
     //Parte grafica
+    public GameObject img;
     public TMPro.TextMeshProUGUI text;
 
     [Header("Dialogos custom")]
@@ -26,10 +27,11 @@ public class Npc_dialogue : MonoBehaviour
 
     [Space]
     //Nombres de los NPC
-    string[] nombres_hombres = new string[6] {"Pedro", "Juan", "Miguel", "Jose", "Matias", "Ricardo"};
+    string[] nombres_hombres = new string[6] { "Pedro", "Juan", "Miguel", "Jose", "Matias", "Ricardo" };
     string[] nombres_mujeres = new string[6] { "Maria", "Angela", "Rosa", "Isabella", "Emily", "Mia" };
     int indicador_hombre;
     int indicador_mujer;
+    public static string Nombre_global;
 
     [Space]
     //Tipos de dialogos por defecto
@@ -52,7 +54,7 @@ public class Npc_dialogue : MonoBehaviour
     [Header("Defina el problema que tendras que solucionar")]
     [Space]
     public Caso caso;
-
+    public static int Caso_tipo;
 
 
     // Start is called before the first frame update
@@ -71,16 +73,28 @@ public class Npc_dialogue : MonoBehaviour
         if (caso == Caso.Perdida)
         {
             Perdida();
+            Caso_tipo = 1;
         }
         else if (caso == Caso.Conflicto)
         {
             Conflicto();
+            Caso_tipo = 2;
         }
         else if (caso == Caso.Problemas)
         {
             Problema();
+            Caso_tipo = 3;
         }
-       
+
+        if (Hombre)
+        {
+            Nombre_global = nombres_hombres[indicador_hombre];
+        }
+        if (Mujer)
+        {
+            Nombre_global = nombres_mujeres[indicador_mujer];
+        }
+
     }   
 
 
@@ -93,13 +107,13 @@ public class Npc_dialogue : MonoBehaviour
                 switch (Selector) 
                 {
                     case 1:
-                        Dialogo_1 = "Hola mi nombre es " + nombres_hombres[indicador_hombre] + " y reciente mente perdi un objeto de " + nombres_mujeres[indicador_mujer] + ", quisiera recuperarlo me podrias ayudar?";
+                        Dialogo_1 = nombres_hombres[indicador_hombre]+"   :  "+ "Hola mi nombre es"  + nombres_hombres[indicador_hombre] + " y reciente mente perdi un objeto de " + nombres_mujeres[indicador_mujer] + ", quisiera recuperarlo me podrias ayudar?";
                         break;
                     case 2:
-                        Dialogo_2 = "Hola mi nombre es " + nombres_hombres[indicador_hombre] + " y hace un tiempo perdi un reloj de " + nombres_mujeres[indicador_mujer] + ", podrias buscarlo por mi?";
+                        Dialogo_2 = nombres_hombres[indicador_hombre] + "   :  " + "Hola mi nombre es " + nombres_hombres[indicador_hombre] + " y hace un tiempo perdi un reloj de " + nombres_mujeres[indicador_mujer] + ", podrias buscarlo por mi?";
                         break;
                     default:
-                        Dialogo_3 = "Hola mi nombre es " + nombres_hombres[indicador_hombre] + " sabes un dia me pedi prestado unas ropas de " + nombres_mujeres[indicador_mujer] + ", podrias ir a mi casa a recuperar las ropas?";
+                        Dialogo_3 = nombres_hombres[indicador_hombre] + "   :  " + "Hola mi nombre es " + nombres_hombres[indicador_hombre] + " sabes un dia me pedi prestado unas ropas de " + nombres_mujeres[indicador_mujer] + ", podrias ir a mi casa a recuperar las ropas?";
                         break;
                 }   
             }
@@ -108,13 +122,13 @@ public class Npc_dialogue : MonoBehaviour
                 switch (Selector)
                 {
                     case 1:
-                        Dialogo_1 = "Hola mi nombre es " + nombres_mujeres[indicador_mujer] + " y reciente mente perdi un objeto de " + nombres_hombres[indicador_hombre] + ", quisiera recuperarlo me podrias ayudar?";
+                        Dialogo_1 = nombres_mujeres[indicador_mujer] + "   :  " + "Hola mi nombre es " + nombres_mujeres[indicador_mujer] + " y reciente mente perdi un objeto de " + nombres_hombres[indicador_hombre] + ", quisiera recuperarlo me podrias ayudar?";
                         break;
                     case 2:
-                        Dialogo_2 = "Hola mi nombre es " + nombres_mujeres[indicador_mujer] + " y hace un tiempo perdi un reloj de " + nombres_hombres[indicador_hombre] + ", podrias buscarlo por mi?";
+                        Dialogo_2 = nombres_mujeres[indicador_mujer] + "   :  " +"Hola mi nombre es " + nombres_mujeres[indicador_mujer] + " y hace un tiempo perdi un reloj de " + nombres_hombres[indicador_hombre] + ", podrias buscarlo por mi?";
                         break;
                     default:
-                        Dialogo_3 = "Hola mi nombre es " + nombres_mujeres[indicador_mujer] + " sabes un dia me pedi prestado unas ropas de " + nombres_hombres[indicador_hombre] + ", podrias ir a mi casa a recuperar las ropas?";
+                        Dialogo_3 = nombres_mujeres[indicador_mujer] + "   :  " + "Hola mi nombre es " + nombres_mujeres[indicador_mujer] + " sabes un dia me pedi prestado unas ropas de " + nombres_hombres[indicador_hombre] + ", podrias ir a mi casa a recuperar las ropas?";
                         break;
                 }
             }
@@ -131,13 +145,13 @@ public class Npc_dialogue : MonoBehaviour
                 switch (Selector)
                 {
                     case 1:
-                        Dialogo_1 = "Hola mi nombre es " + nombres_hombres[indicador_hombre] + " y reciente tuve un conflicto con " + nombres_mujeres[indicador_mujer] + ", me podrias ayudar a resolverlo?";
+                        Dialogo_1 = nombres_hombres[indicador_hombre] + "   :   " + "Hola mi nombre es " + nombres_hombres[indicador_hombre] + " y reciente tuve un conflicto con " + nombres_mujeres[indicador_mujer] + ", me podrias ayudar a resolverlo?";
                         break;
                     case 2:
-                        Dialogo_2 = "Hola mi nombre es " + nombres_hombres[indicador_hombre] + " y tuve una discucion con " + nombres_mujeres[indicador_mujer] + ", podrias hablar con ella";
+                        Dialogo_2 = nombres_hombres[indicador_hombre] + "   :  " + "Hola mi nombre es " + nombres_hombres[indicador_hombre] + " y tuve una discucion con " + nombres_mujeres[indicador_mujer] + ", podrias hablar con ella";
                         break;
                     default:
-                        Dialogo_3 = "Hola mi nombre es " + nombres_hombres[indicador_hombre] + " sabes yo no me llevo bien con " + nombres_mujeres[indicador_mujer] + ", podrias decirlo lo que pienso sobre ella";
+                        Dialogo_3 = nombres_hombres[indicador_hombre] + "   :  " + "Hola mi nombre es " + nombres_hombres[indicador_hombre] + " sabes yo no me llevo bien con " + nombres_mujeres[indicador_mujer] + ", podrias decirlo lo que pienso sobre ella";
                         break;
                 }   
             }
@@ -146,13 +160,13 @@ public class Npc_dialogue : MonoBehaviour
                 switch (Selector)
                 {
                     case 1:
-                        Dialogo_1 = "Hola mi nombre es " + nombres_mujeres[indicador_mujer] + "y reciente tuve un conflicto con " + nombres_hombres[indicador_hombre] + ", me podrias ayudar a resolverlo?";
+                        Dialogo_1 = nombres_mujeres[indicador_mujer] + "   :  " + "Hola mi nombre es " + nombres_mujeres[indicador_mujer] + "y reciente tuve un conflicto con " + nombres_hombres[indicador_hombre] + ", me podrias ayudar a resolverlo?";
                         break;
                     case 2:
-                        Dialogo_2 = "Hola mi nombre es " + nombres_mujeres[indicador_mujer] + " y tuve una discucion con " + nombres_hombres[indicador_hombre] + ", podrias hablar con el";
+                        Dialogo_2 = nombres_mujeres[indicador_mujer] + "   :  " + "Hola mi nombre es " + nombres_mujeres[indicador_mujer] + " y tuve una discucion con " + nombres_hombres[indicador_hombre] + ", podrias hablar con el";
                         break;
                     default:
-                        Dialogo_3 = "Hola mi nombre es " + nombres_mujeres[indicador_mujer] + " sabes yo no me llevo bien con " + nombres_hombres[indicador_hombre] + ", podrias decirlo lo que pienso sobre el";
+                        Dialogo_3 = nombres_mujeres[indicador_mujer] + "   :  " + "Hola mi nombre es " + nombres_mujeres[indicador_mujer] + " sabes yo no me llevo bien con " + nombres_hombres[indicador_hombre] + ", podrias decirlo lo que pienso sobre el";
                         break;
                 } 
             }
@@ -170,6 +184,7 @@ public class Npc_dialogue : MonoBehaviour
         if (Name|| collision.gameObject.CompareTag("Player;"))
         {
             Nambre_text.SetActive(true);
+            img.SetActive(true);
         }
         if (collision.CompareTag("Player")||Dialgo_custom==false)
         {
